@@ -1,4 +1,4 @@
-project('aravis-sample-c', 'c', version: '0.0.1')
+project('aravis-c-examples', 'c', version: '0.0.1')
 
 aravis_dep = dependency('aravis-0.8')
 
