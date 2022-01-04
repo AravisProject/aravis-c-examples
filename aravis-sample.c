@@ -14,7 +14,7 @@ main (int argc, char **argv)
 	if (ARV_IS_CAMERA (camera)) {
 		printf ("Found camera '%s'\n", arv_camera_get_model_name (camera, NULL));
 
-		buffer = arv_camera_acquisition (camera, 1000, &error);
+		buffer = arv_camera_acquisition (camera, 0, &error);
 
 		if (ARV_IS_BUFFER (buffer)) {
 			printf ("Acquired %d×%d buffer\n",
