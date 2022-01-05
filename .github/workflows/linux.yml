@@ -1,0 +1,24 @@
+name: linux
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  release:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        pip install meson ninja
+    - name: Build
+      run: |
+        meson --buildtype=plain . ./build
+        ninja -C ./build
+      env:
+        CC: gcc
