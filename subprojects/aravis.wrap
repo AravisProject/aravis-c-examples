@@ -1,6 +1,6 @@
 [wrap-git]
 url = https://github.com/AravisProject/aravis.git
-revision = wip/subproject
+revision = main
 
 [provide]
 dependency_names = aravis-0.8
