@@ -1,5 +1,5 @@
 [wrap-git]
-url = git@github.com:AravisProject/aravis.git
+url = https://github.com/AravisProject/aravis.git
 revision = wip/subproject
 
 [provide]
