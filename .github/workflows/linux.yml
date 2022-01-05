@@ -8,7 +8,7 @@ on:
   release:
   workflow_dispatch:
   schedule:
-    - cron:  '30 1 * * 7'
+    - cron: '30 1 * * 0'
 
 jobs:
   linux:
