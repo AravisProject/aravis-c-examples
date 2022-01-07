@@ -9,6 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*
+ * Connect to the first available camera, then acquire 10 buffers.
+ */
+
 int
 main (int argc, char **argv)
 {
