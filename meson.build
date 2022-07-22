@@ -8,6 +8,7 @@ examples = [
   '02-multiple-acquisition-signal',
   '03-camera-api',
   '04-camera-features',
+  '05-chunk-parser'
 ]
 
 foreach e: examples
