@@ -9,6 +9,34 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static void
+stream_callback (void *user_data, ArvStreamCallbackType type, ArvBuffer *buffer)
+{
+	/* This code is called from the stream receiving thread, which means all the time spent there is less time
+	 * available for the reception of incoming packets */
+
+	switch (type) {
+		case ARV_STREAM_CALLBACK_TYPE_INIT:
+			/* Stream thread started.
+			 *
+			 * Here you may want to change the thread priority arv_make_thread_realtime() or
+			 * arv_make_thread_high_priority() */
+			break;
+		case ARV_STREAM_CALLBACK_TYPE_START_BUFFER:
+			/* The first packet of a new frame was received */
+			break;
+		case ARV_STREAM_CALLBACK_TYPE_BUFFER_DONE:
+			/* The buffer is received, successfully or not.
+			 *
+			 * You could here signal the new buffer to another thread than the main one, and pull/push the
+			 * buffer from there. */
+			break;
+		case ARV_STREAM_CALLBACK_TYPE_EXIT:
+			/* Stream thread ended */
+			break;
+	}
+}
+
 /*
  * Connect to the first available camera, then acquire 10 buffers.
  */
@@ -28,12 +56,12 @@ main (int argc, char **argv)
 		printf ("Found camera '%s'\n", arv_camera_get_model_name (camera, NULL));
 
 		/* Create the stream object without callback */
-		stream = arv_camera_create_stream (camera, NULL, NULL, &error);
+		stream = arv_camera_create_stream (camera, stream_callback, NULL, &error);
 		if (ARV_IS_STREAM (stream)) {
 			int i;
 			size_t payload;
 
-			/* Retrive the payload size for buffer creation */
+			/* Retrieve the payload size for buffer creation */
 			payload = arv_camera_get_payload (camera, &error);
 			if (error == NULL) {
 				/* Insert some buffers in the stream buffer pool */
