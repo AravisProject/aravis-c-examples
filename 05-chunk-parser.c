@@ -21,12 +21,15 @@ main (int argc, char **argv)
 	if (ARV_IS_CAMERA (camera)) {
 		ArvBuffer *buffer = NULL;
 
+		printf ("Found camera '%s'\n", arv_camera_get_model_name (camera, NULL));
+
 		/* Instantiation of a chunk parser */
 		parser = arv_camera_create_chunk_parser (camera);
 
 		/* Enable chunk data */
 		arv_camera_set_chunks (camera, "Width,Height", &error);
 
+		/* Acquire a single buffer */
 		if (error == NULL)
 			buffer = arv_camera_acquisition	(camera, 1000000, &error);
 
