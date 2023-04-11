@@ -43,7 +43,7 @@ main (int argc, char **argv)
 	}
 
 	if (error != NULL) {
-		/* En error happened, display the correspdonding message */
+		/* An error happened, display the correspdonding message */
 		printf ("Error: %s\n", error->message);
 		return EXIT_FAILURE;
 	}
