@@ -83,10 +83,16 @@ main (int argc, char **argv)
 
 		printf ("Found camera '%s'\n", arv_camera_get_model_name (camera, NULL));
 
-		/* Create the stream object without callback */
+		arv_camera_set_acquisition_mode (camera, ARV_ACQUISITION_MODE_CONTINUOUS, &error);
+
 		callback_data.counter = 0;
 		callback_data.done = FALSE;
-		callback_data.stream = arv_camera_create_stream (camera, stream_callback, &callback_data, &error);
+		callback_data.stream = NULL;
+
+		if (error == NULL)
+			/* Create the stream object with callback */
+			callback_data.stream = arv_camera_create_stream (camera, stream_callback, &callback_data, &error);
+
 		if (ARV_IS_STREAM (callback_data.stream)) {
 			int i;
 			size_t payload;

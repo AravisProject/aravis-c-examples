@@ -23,12 +23,16 @@ main (int argc, char **argv)
 	camera = arv_camera_new (NULL, &error);
 
 	if (ARV_IS_CAMERA (camera)) {
-		ArvStream *stream;
+		ArvStream *stream = NULL;
 
 		printf ("Found camera '%s'\n", arv_camera_get_model_name (camera, NULL));
 
-		/* Create the stream object without callback */
-		stream = arv_camera_create_stream (camera, NULL, NULL, &error);
+		arv_camera_set_acquisition_mode (camera, ARV_ACQUISITION_MODE_CONTINUOUS, &error);
+
+		if (error == NULL)
+			/* Create the stream object without callback */
+			stream = arv_camera_create_stream (camera, NULL, NULL, &error);
+
 		if (ARV_IS_STREAM (stream)) {
 			int i;
 			size_t payload;
